@@ -1,4 +1,4 @@
-# {{ name }}
+# Midpoint Meetup -- Preact
 
 ## CLI Commands
 
