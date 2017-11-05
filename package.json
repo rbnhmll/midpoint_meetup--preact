@@ -29,6 +29,7 @@
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
     "preact-router": "^2.5.5",
+    "scroll-to-element": "^2.0.0",
     "turf": "^3.0.14"
   }
 }
