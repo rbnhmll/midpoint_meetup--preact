@@ -1,2 +1,99 @@
 @import ../../style/variables.sass
 @import ../../style/mixins.sass
+
+.locationLabel
+    font-family: $sans
+    font-size: 1.2rem
+
+.submitForm
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.inputContainer
+    width: 75%
+
+    @media all and (max-width: 800px)
+        width: 75%
+
+        .input
+            width: 100%
+
+    @media all and (max-width: 700px)
+        width: 90%
+
+    @media all and (max-width: 485px)
+        width: 100%
+
+.userInputField
+    width: 100%
+    padding: 20px
+    margin-top: 5px
+    border: 2px solid lighten($darkblue, 10)
+    border-radius: 0
+    transition: all 0.5s ease
+
+    &:hover,
+    &:focus
+        box-shadow: 4px 4px 0 transparentize($darkblue, 0.1)
+
+label
+    text-transform: uppercase
+
+.input
+    margin-bottom: 20px
+
+input:-webkit-autofill
+    -webkit-box-shadow: 0 0 0px 1000px lighten($darkblue, 65) inset
+
+.submitBtn
+    width: 100%
+    font-size: 1.5rem
+
+    +button
+
+    &:hover
+        +buttonHover
+
+    &:active
+        +buttonActive
+
+.button-container
+    width: 50%
+    margin: 50px 0
+
+    @media all and (max-width: 800px)
+        width: 75%
+
+    @media all and (max-width: 700px)
+        width: 90%
+
+    @media all and (max-width: 485px)
+        width: 100%
+
+.chooserContainer
+    display: flex
+    flex-direction: row
+    width: 100%
+    padding: 0
+    justify-content: space-between
+    margin-bottom: 20px
+
+    label
+        width: 47.5%
+
+        +button
+
+        &:hover
+            +buttonHover
+
+        &:active
+            +buttonActive
+
+.chooserContainer #coffeeRadio:checked ~ label[for=coffeeRadio],
+.chooserContainer #beerRadio:checked ~ label[for=beerRadio]
+    +buttonActive
+
+input[type=radio]
+    margin: 0 10px
+    display: none

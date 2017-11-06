@@ -1,2 +1,20 @@
 @import ../../style/variables.sass
 @import ../../style/mixins.sass
+
+.social-box
+    margin: 25px 0
+
+    .twitter-btn
+        +button
+
+        font-size: 0.8rem
+        text-decoration: none
+        color: #fff
+        background: $orange
+        padding: 5px 10px
+
+        &:hover
+            +buttonHover
+
+        &:active
+            +buttonActive

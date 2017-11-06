@@ -1,2 +1,32 @@
 @import ../../style/variables.sass
 @import ../../style/mixins.sass
+
+.venueContainer
+    width: 30%
+    margin-bottom: 25px
+
+    img
+        box-shadow: 4px 4px 0 transparentize($darkblue, 0.1)
+        max-width: 100%
+
+    p
+        margin: 0
+        font-weight: 300
+        line-height: 1.7
+
+    a
+        display: inline-block
+        text-decoration: none
+        margin-top: 20px
+        color: $darkblue
+        transition: all 0.3s ease
+
+        &:hover
+            color: $orange
+
+    span
+        color: $orange
+
+    @media all and (max-width: 700px)
+        width: 100%
+        margin-bottom: 35px

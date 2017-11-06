@@ -2,6 +2,8 @@ import { h, Component } from 'preact';
 import Axios from 'axios';
 import Turf from 'turf';
 
+import style from './style.sass';
+
 class SearchForm extends Component {
 	constructor() {
 		super();
@@ -167,37 +169,37 @@ class SearchForm extends Component {
 
 	render() {
 		return (
-			<form className="submitForm" onSubmit={this.getUserInputs}>
-				<div className="inputContainer">
-					<div className="input input1">
-						<label htmlFor="yourLocation" className="locationLabel">
+			<form class={style.submitForm} onSubmit={this.getUserInputs}>
+				<div class={style.inputContainer}>
+					<div class={`${style.input} ${style.input1}`}>
+						<label htmlFor="yourLocation" class={style.locationLabel}>
 							Your Location
 						</label>
 						<input
+							class={`${style.yourLocation} ${style.userInputField}`}
 							onChange={this.handleChange}
 							value={this.state.userInput.yourLocation}
 							type="text"
 							name="yourLocation"
-							className="yourLocation userInputField"
 							placeholder="Your address (e.g. 100 Queen Street West, Toronto)"
 						/>
 					</div>
-					<div className="input input2">
-						<label htmlFor="friendLocation" className="locationLabel">
+					<div class={`${style.input} ${style.input2}`}>
+						<label htmlFor="friendLocation" class={style.locationLabel}>
 							Friend's location
 						</label>
 						<input
+							class={`${style.friendLocation} ${style.userInputField}`}
 							onChange={this.handleChange}
 							value={this.state.userInput.friendLocation}
 							type="text"
 							name="friendLocation"
-							className="friendLocation userInputField"
 							placeholder="Friend's address (e.g. 1 Yonge Street, Toronto)"
 						/>
 					</div>
 				</div>
-				<div className="button-container  animated fadeIn">
-					<div className="chooserContainer">
+				<div class={`${style['button-container']} animated fadeIn`}>
+					<div class={style.chooserContainer}>
 						<input
 							checked={this.state.userInput.venueType === 'coffee'}
 							onChange={this.handleChange}
@@ -217,7 +219,7 @@ class SearchForm extends Component {
 						/>
 						<label htmlFor="beerRadio">Beer</label>
 					</div>
-					<input type="submit" value="Meet up!" name="meetUp" className="submitBtn" />
+					<input type="submit" value="Meet up!" name="meetUp" class={style.submitBtn} />
 				</div>
 			</form>
 		);

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import style from './style.sass';
 
-const ResultsMap = () => <div id="map" />;
+const ResultsMap = () => <div class={style.map} id="map" />;
 
 export default ResultsMap;
