@@ -1,4 +1,6 @@
 import { h, Component } from 'preact';
+import scrollToElement from 'scroll-to-element';
+require('mapbox.js');
 
 import Banner from './banner';
 import SearchForm from './searchForm';
@@ -7,8 +9,6 @@ import Results from './results';
 // import SocialBox from './socialBox';
 import Modal from './modal';
 import ModalToggle from './modalToggle';
-
-const scrollToElement = require('scroll-to-element');
 
 class App extends Component {
 	constructor() {
