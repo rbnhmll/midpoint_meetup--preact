@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
+
 import scrollToElement from 'scroll-to-element';
-require('mapbox.js');
+import 'mapbox.js';
+import 'font-awesome/css/font-awesome.min.css';
 
 import Banner from './banner';
 import SearchForm from './searchForm';
