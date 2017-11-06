@@ -1,7 +1,7 @@
 @import ../../style/variables.sass
 @import ../../style/mixins.sass
 
-.modal-container
+.modal_container
     position: fixed
     width: 100%
     height: 100%
@@ -14,10 +14,10 @@
     visibility: hidden
     transition: all 0.5s ease
 
-.modal-container.show
-    opacity: 1
-    visibility: visible
-    transform: scale(1)
+    &.show
+        opacity: 1
+        visibility: visible
+        transform: scale(1)
 
 .overlay
     background: rgba(0, 0, 0, 0.4)

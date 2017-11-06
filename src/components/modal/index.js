@@ -17,10 +17,10 @@ class Modal extends Component {
 			return null;
 		}
 		return (
-			<div class="modal-container show">
-				<div class="overlay" />
-				<div class="modal">
-					<button onClick={this.props.closeModal} class="close-button">
+			<div class={[style.modal_container, style.show]}>
+				<div class={style.overlay} />
+				<div class={style.modal}>
+					<button onClick={this.props.closeModal} class={style['close-button']}>
 						<i class="fa fa-times" />
 					</button>
 					<p>

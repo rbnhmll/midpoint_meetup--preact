@@ -20,29 +20,24 @@ body
     padding: 25px
     box-shadow: 10px 10px 0 transparentize($darkblue, 0.1)
 
+    @media all and (max-width: 1020px)
+        margin: 50px 20px
+
+    @media all and (max-width: 800px)
+        margin: 25px 20px
+
+    @media all and (max-width: 485px)
+        margin: 15px
+
 h1,
 h2,
 h3,
 h4
     font-family: $sans
 
-.nav
-    ul
-        list-style: none
-        padding: 0
-        margin: 0
-
-.nav__item
-    float: right
-
-    a
-        text-decoration: none
-
 #map
     width: 90%
-
-    position:relative
-
+    position: relative
     top: 0
     bottom: 0
     height: 350px
@@ -134,46 +129,6 @@ input[type=radio]
     margin: 0 10px
     display: none
 
-.resultsContainer
-    width: 90%
-    margin: 0 auto
-    background: linear-gradient(rgba(#fff, 0.5), rgba(#fff, 0.5)), url(asset_path("patterns/hexellence.png"))
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    justify-content: space-between
-    border: 2px solid $darkblue
-    margin-top: 50px
-    padding: 20px
-
-    img
-        box-shadow: 4px 4px 0 transparentize($darkblue, 0.1)
-
-.venueContainer
-    width: 30%
-    margin-bottom: 25px
-
-    p
-        margin: 0
-        font-weight: 300
-        line-height: 1.7
-
-    a
-        display: inline-block
-        text-decoration: none
-        margin-top: 20px
-        color: $darkblue
-        transition: all 0.3s ease
-
-        &:hover
-            color: $orange
-
-    span
-        color: $orange
-
-.resultsContainer img
-    max-width: 100%
-
 .hide
     display: none
     transition: all 0.5s ease
@@ -216,14 +171,7 @@ input[type=radio]
 
 /*MEDIA QUERIES
 
-@media all and (max-width: 1020px)
-    .wrapper
-        margin: 50px 20px
-
 @media all and (max-width: 800px)
-    .wrapper
-        margin: 25px 20px
-
     .button-container
         width: 75%
 
@@ -248,17 +196,7 @@ input[type=radio]
     .button-container
         width: 90%
 
-@media all and (max-width: 525px)
-    h1
-        font-size: 4rem
-
 @media all and (max-width: 485px)
-    .wrapper
-        margin: 15px
-
-    h1
-        font-size: 3.5rem
-
     .submitForm
         .inputContainer
             width: 100%
@@ -272,8 +210,3 @@ input[type=radio]
 
     .resultsContainer
         width: 100%
-
-@media all and (max-width: 405px)
-    h1
-        font-size: 2.5rem
-        text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8), 5px 5px 0 transparentize($darkblue, 0.4)

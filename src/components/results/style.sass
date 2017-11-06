@@ -1,0 +1,42 @@
+@import ../../style/variables.sass
+@import ../../style/mixins.sass
+
+.resultsContainer
+    width: 90%
+    margin: 0 auto
+    background: linear-gradient(rgba(#fff, 0.5), rgba(#fff, 0.5)), url("../../assets/images/patterns/hexellence.png")
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    justify-content: space-between
+    border: 2px solid $darkblue
+    margin-top: 50px
+    padding: 20px
+
+    img
+        box-shadow: 4px 4px 0 transparentize($darkblue, 0.1)
+
+.venueContainer
+    width: 30%
+    margin-bottom: 25px
+
+    p
+        margin: 0
+        font-weight: 300
+        line-height: 1.7
+
+    a
+        display: inline-block
+        text-decoration: none
+        margin-top: 20px
+        color: $darkblue
+        transition: all 0.3s ease
+
+        &:hover
+            color: $orange
+
+    span
+        color: $orange
+
+.resultsContainer img
+    max-width: 100%
