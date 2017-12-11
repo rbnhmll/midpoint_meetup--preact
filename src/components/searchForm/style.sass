@@ -3,7 +3,9 @@
 
 .locationLabel
     font-family: $sans
-    font-size: 1.2rem
+    font-size: 2rem
+    margin-bottom: 5px
+    display: inline-block
 
 .submitForm
     display: flex
@@ -28,10 +30,10 @@
 .userInputField
     width: 100%
     padding: 20px
-    margin-top: 5px
     border: 2px solid lighten($darkblue, 10)
     border-radius: 0
     transition: all 0.5s ease
+    font-size: 1.6rem
 
     &:hover,
     &:focus
@@ -41,14 +43,14 @@ label
     text-transform: uppercase
 
 .input
-    margin-bottom: 20px
+    margin-bottom: 2rem
 
 input:-webkit-autofill
     -webkit-box-shadow: 0 0 0px 1000px lighten($darkblue, 65) inset
 
 .submitBtn
     width: 100%
-    font-size: 1.5rem
+    font-size: 1.8rem
 
     +button
 
@@ -81,6 +83,7 @@ input:-webkit-autofill
 
     label
         width: 47.5%
+        font-size: 1.6rem
 
         +button
 
@@ -97,3 +100,22 @@ input:-webkit-autofill
 input[type=radio]
     margin: 0 10px
     display: none
+
+.inputWrapper
+    position: relative
+
+.locationArrow
+    font-size: 25px
+    position: absolute
+    right: 2px
+    bottom: 2px
+    top: 2px
+    width: 60px
+    border: none
+    background: transparent
+    color: $lightgrey
+    transition: all 0.3s ease
+    &:hover,
+    &:focus
+        color: $darkgrey
+        outline: none

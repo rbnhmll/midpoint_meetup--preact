@@ -14,6 +14,7 @@ class SearchForm extends Component {
 				venueType: ''
 			},
 			centerPtResult: '',
+			loadingGeo: false,
 			clientId: 'RUPFMKH0N5PWTIS43LH20C1AWZCMSRJOF02L1Q0PBXEVXIR0',
 			clientSecret: 'YRFJZOCG0J3RAJCLGTTAPORHLNBHRNO0X0DSBTBRNA21HMFS',
 			mapBoxKey: 'pk.eyJ1IjoicmJuaG1sbCIsImEiOiI3NjY4ZDk5NjFhMTYyMDMxMWFmMmM5YWEzMzlkMDgwZiJ9.Ep7u1zX_6SFI94jPki9O-w'
@@ -24,8 +25,36 @@ class SearchForm extends Component {
 		this.getGeocode = this.getGeocode.bind(this);
 		this.getMidpoint = this.getMidpoint.bind(this);
 		this.getVenues = this.getVenues.bind(this);
+		this.getGeolocation = this.getGeolocation.bind(this);
+		this.getReverseGeocode = this.getReverseGeocode.bind(this);
+		this.addGeolocationButton = this.addGeolocationButton.bind(this);
 	}
 
+	addGeolocationButton() {
+		if ('geolocation' in navigator) {
+		} else {
+			console.log('no geo');
+		}
+
+	}
+
+	async getGeolocation() {
+		this.setState({ loadingGeo: true });
+		const position = await new Promise((resolve, reject) => {
+			navigator.geolocation.getCurrentPosition((position) => {
+				resolve([position.coords.longitude, position.coords.latitude]);
+			});
+		});
+		
+		const response = await this.getReverseGeocode(position);
+		const addr = response.data.features[0].place_name;
+		const newState = Object.assign({}, this.state);
+		newState.userInput.yourLocation = addr;
+		this.setState({ userInput: newState.userInput });
+		this.setState({ loadingGeo: false });			
+	}
+
+	
 	getUserInputs(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -45,19 +74,19 @@ class SearchForm extends Component {
 			this.convertToGeo();
 		}
 	}
-
+	
 	getGeocode(userEntry1, userEntry2) {
 		const self = this;
-
+		
 		function firstLocation() {
 			return Axios.get(
 				`https://api.mapbox.com/v4/geocode/mapbox.places/${userEntry1}.json?access_token=${self.state.mapBoxKey}`
 			)
-				.then(response => response)
-				.catch(error => {
-					console.error(error);
-					return error;
-				});
+			.then(response => response)
+			.catch(error => {
+				console.error(error);
+				return error;
+			});
 		}
 
 		function secondLocation() {
@@ -81,6 +110,13 @@ class SearchForm extends Component {
 				self.getMidpoint(coords1, coords2);
 			})
 		);
+	}
+
+	async getReverseGeocode(coordsArr) {
+		const reverse = await Axios.get(
+			`https://api.mapbox.com/v4/geocode/mapbox.places/${coordsArr[0]},${coordsArr[1]}.json?access_token=${this.state.mapBoxKey}` 
+		);
+		return reverse;
 	}
 
 	getMidpoint(coords1, coords2) {
@@ -171,20 +207,30 @@ class SearchForm extends Component {
 		return (
 			<form class={style.submitForm} onSubmit={this.getUserInputs}>
 				<div class={style.inputContainer}>
-					<div class={`${style.input} ${style.input1}`}>
+					<div class={`${style.input} input1`}>
 						<label htmlFor="yourLocation" class={style.locationLabel}>
 							Your Location
 						</label>
-						<input
-							class={`${style.yourLocation} ${style.userInputField}`}
-							onChange={this.handleChange}
-							value={this.state.userInput.yourLocation}
-							type="text"
-							name="yourLocation"
-							placeholder="Your address (e.g. 100 Queen Street West, Toronto)"
-						/>
+						<div className={style.inputWrapper}>
+							<input
+								class={`${style.yourLocation} ${style.userInputField}`}
+								onChange={this.handleChange}
+								value={this.state.userInput.yourLocation}
+								type="text"
+								name="yourLocation"
+								placeholder="Your address (e.g. 100 Queen Street West, Toronto)"
+							/>
+							<button type="button" class={style.locationArrow} title="get user location" onclick={this.getGeolocation}>
+								<i
+									class={
+										this.state.loadingGeo ? 'fa fa-spinner fa-pulse' : 'fa fa-location-arrow'
+									}
+									aria-hidden="true"
+								/>
+							</button>
+						</div>
 					</div>
-					<div class={`${style.input} ${style.input2}`}>
+					<div class={`${style.input} input2`}>
 						<label htmlFor="friendLocation" class={style.locationLabel}>
 							Friend's location
 						</label>
