@@ -14,6 +14,7 @@ class SearchForm extends Component {
 				venueType: ''
 			},
 			centerPtResult: '',
+			supports_geolocation: false,
 			loadingGeo: false,
 			clientId: 'RUPFMKH0N5PWTIS43LH20C1AWZCMSRJOF02L1Q0PBXEVXIR0',
 			clientSecret: 'YRFJZOCG0J3RAJCLGTTAPORHLNBHRNO0X0DSBTBRNA21HMFS',
@@ -27,15 +28,16 @@ class SearchForm extends Component {
 		this.getVenues = this.getVenues.bind(this);
 		this.getGeolocation = this.getGeolocation.bind(this);
 		this.getReverseGeocode = this.getReverseGeocode.bind(this);
-		this.addGeolocationButton = this.addGeolocationButton.bind(this);
+		this.supportsGeolocation = this.supportsGeolocation.bind(this);		
 	}
 
-	addGeolocationButton() {
+	supportsGeolocation() {
 		if ('geolocation' in navigator) {
-		} else {
+			this.setState({ supports_geolocation: true });
+		}
+		else {
 			console.log('no geo');
 		}
-
 	}
 
 	async getGeolocation() {
@@ -82,11 +84,11 @@ class SearchForm extends Component {
 			return Axios.get(
 				`https://api.mapbox.com/v4/geocode/mapbox.places/${userEntry1}.json?access_token=${self.state.mapBoxKey}`
 			)
-			.then(response => response)
-			.catch(error => {
-				console.error(error);
-				return error;
-			});
+				.then(response => response)
+				.catch(error => {
+					console.error(error);
+					return error;
+				});
 		}
 
 		function secondLocation() {
@@ -192,6 +194,7 @@ class SearchForm extends Component {
 	}
 
 	handleChange(e) {
+		console.log(e)
 		const newState = Object.assign({}, this.state);
 		newState.userInput[e.target.name] = e.target.value;
 		this.setState({ userInput: newState.userInput });
@@ -203,15 +206,20 @@ class SearchForm extends Component {
 		this.getGeocode(userEntry1, userEntry2);
 	}
 
+	componentWillMount() {
+		this.supportsGeolocation();
+	}
+
 	render() {
 		return (
-			<form class={style.submitForm} onSubmit={this.getUserInputs}>
+			<form class={`${style.submitForm} ${this.state.supports_geolocation ? `${style.supports_geo}` : ''}
+			`} onSubmit={this.getUserInputs}>
 				<div class={style.inputContainer}>
 					<div class={`${style.input} input1`}>
 						<label htmlFor="yourLocation" class={style.locationLabel}>
 							Your Location
 						</label>
-						<div className={style.inputWrapper}>
+						<div class={style.inputWrapper}>
 							<input
 								class={`${style.yourLocation} ${style.userInputField}`}
 								onChange={this.handleChange}
@@ -247,8 +255,8 @@ class SearchForm extends Component {
 				<div class={`${style['button-container']} animated fadeIn`}>
 					<div class={style.chooserContainer}>
 						<input
-							checked={this.state.userInput.venueType === 'coffee'}
 							onChange={this.handleChange}
+							checked={this.state.userInput.venueType === 'coffee' ? 'checked' : ''}
 							id="coffeeRadio"
 							type="radio"
 							name="venueType"
@@ -256,8 +264,8 @@ class SearchForm extends Component {
 						/>
 						<label htmlFor="coffeeRadio">Coffee</label>
 						<input
-							checked={this.state.userInput.venueType === 'beer'}
 							onChange={this.handleChange}
+							checked={this.state.userInput.venueType === 'beer' ? 'checked' : ''}
 							id="beerRadio"
 							type="radio"
 							name="venueType"
