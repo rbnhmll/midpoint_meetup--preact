@@ -13,11 +13,8 @@ class Modal extends Component {
 	}
 
 	render() {
-		if (!this.props.show_modal) {
-			return null;
-		}
 		return (
-			<div class={`${style.modal_container} ${style.show}`}>
+			<div class={`${style.modal_container} ${this.props.show_modal ? `${style.show}` : ''}`}>
 				<div class={style.overlay} />
 				<div class={style.modal}>
 					<button onClick={this.props.closeModal} class={style['close-button']}>
