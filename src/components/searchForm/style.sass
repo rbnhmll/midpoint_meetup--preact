@@ -86,7 +86,6 @@ input:-webkit-autofill
     label
         width: 47.5%
         font-size: 1.6rem
-
         +button
 
         &:hover
@@ -107,12 +106,12 @@ input:-webkit-autofill
         clip: rect(0 0 0 0);
         overflow: hidden;
     
-    input[type=radio]:active + label,
-    input[type=radio]:focus + label
-        +buttonHover
+        &:active + label,
+        &:focus + label
+            +buttonHover
 
-    input[type=radio]:checked + label
-        +buttonActive
+        &:checked + label
+            +buttonActive
 
 .inputWrapper
     position: relative
