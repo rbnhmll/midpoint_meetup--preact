@@ -93,13 +93,21 @@ input:-webkit-autofill
         &:active
             +buttonActive
 
-.chooserContainer #coffeeRadio:checked ~ label[for=coffeeRadio],
-.chooserContainer #beerRadio:checked ~ label[for=beerRadio]
-    +buttonActive
-
 input[type=radio]
-    margin: 0 10px
-    display: none
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+
+.chooserContainer
+    input[type=radio]:checked + label
+        +buttonActive
 
 .inputWrapper
     position: relative
