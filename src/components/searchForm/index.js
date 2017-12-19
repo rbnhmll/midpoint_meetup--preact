@@ -194,7 +194,6 @@ class SearchForm extends Component {
 	}
 
 	handleChange(e) {
-		console.log(e)
 		const newState = Object.assign({}, this.state);
 		newState.userInput[e.target.name] = e.target.value;
 		this.setState({ userInput: newState.userInput });
