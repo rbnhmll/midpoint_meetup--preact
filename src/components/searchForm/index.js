@@ -28,7 +28,7 @@ class SearchForm extends Component {
 		this.getVenues = this.getVenues.bind(this);
 		this.getGeolocation = this.getGeolocation.bind(this);
 		this.getReverseGeocode = this.getReverseGeocode.bind(this);
-		this.supportsGeolocation = this.supportsGeolocation.bind(this);		
+		this.supportsGeolocation = this.supportsGeolocation.bind(this);
 	}
 
 	supportsGeolocation() {
@@ -53,7 +53,7 @@ class SearchForm extends Component {
 		const newState = Object.assign({}, this.state);
 		newState.userInput.yourLocation = addr;
 		this.setState({ userInput: newState.userInput });
-		this.setState({ loadingGeo: false });			
+		this.setState({ loadingGeo: false });
 	}
 
 	
@@ -116,7 +116,7 @@ class SearchForm extends Component {
 
 	async getReverseGeocode(coordsArr) {
 		const reverse = await Axios.get(
-			`https://api.mapbox.com/v4/geocode/mapbox.places/${coordsArr[0]},${coordsArr[1]}.json?access_token=${this.state.mapBoxKey}` 
+			`https://api.mapbox.com/v4/geocode/mapbox.places/${coordsArr[0]},${coordsArr[1]}.json?access_token=${this.state.mapBoxKey}`
 		);
 		return reverse;
 	}
@@ -212,7 +212,8 @@ class SearchForm extends Component {
 	render() {
 		return (
 			<form class={`${style.submitForm} ${this.state.supports_geolocation ? `${style.supports_geo}` : ''}
-			`} onSubmit={this.getUserInputs}>
+			`} onSubmit={this.getUserInputs}
+			>
 				<div class={style.inputContainer}>
 					<div class={`${style.input} input1`}>
 						<label htmlFor="yourLocation" class={style.locationLabel}>
