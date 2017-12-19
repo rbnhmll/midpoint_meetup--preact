@@ -216,9 +216,6 @@ class SearchForm extends Component {
 			>
 				<div class={style.inputContainer}>
 					<div class={`${style.input} input1`}>
-						<label htmlFor="yourLocation" class={style.locationLabel}>
-							Your Location
-						</label>
 						<div class={style.inputWrapper}>
 							<input
 								class={`${style.yourLocation} ${style.userInputField}`}
@@ -226,8 +223,11 @@ class SearchForm extends Component {
 								value={this.state.userInput.yourLocation}
 								type="text"
 								name="yourLocation"
-								placeholder="Your address (e.g. 100 Queen Street West, Toronto)"
+								required
 							/>
+							<label htmlFor="yourLocation" class={style.locationLabel}>
+								Your location <span>(e.g. 100 Queen Street West, Toronto)</span>
+							</label>
 							<button type="button" class={style.locationArrow} title="get user location" onclick={this.getGeolocation}>
 								<i
 									class={
@@ -239,17 +239,19 @@ class SearchForm extends Component {
 						</div>
 					</div>
 					<div class={`${style.input} input2`}>
-						<label htmlFor="friendLocation" class={style.locationLabel}>
-							Friend's location
-						</label>
-						<input
-							class={`${style.friendLocation} ${style.userInputField}`}
-							onChange={this.handleChange}
-							value={this.state.userInput.friendLocation}
-							type="text"
-							name="friendLocation"
-							placeholder="Friend's address (e.g. 1 Yonge Street, Toronto)"
-						/>
+						<div class={style.inputWrapper}>
+							<input
+								class={`${style.friendLocation} ${style.userInputField}`}
+								onChange={this.handleChange}
+								value={this.state.userInput.friendLocation}
+								type="text"
+								name="friendLocation"
+								required
+							/>
+							<label htmlFor="friendLocation" class={style.locationLabel}>
+								Friend's location <span>(e.g. 1 Yonge Street, Toronto)</span>
+							</label>
+						</div>						
 					</div>
 				</div>
 				<div class={`${style['button-container']} animated fadeIn`}>
