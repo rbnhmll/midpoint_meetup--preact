@@ -111,12 +111,11 @@ class App extends Component {
 		});
 
 		L.Icon.Default.imagePath = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/images/';
-		const self = this;
 		this.state.results.forEach(result => {
 			const v = result.venue;
 			const address = v.location.formattedAddress[0];
 			L.marker([v.location.lat, v.location.lng])
-				.addTo(self.state.map)
+				.addTo(this.state.map)
 				.bindPopup(`${v.name}:<br>${address}`);
 		});
 		this.state.map.setView([this.state.results[0].venue.location.lat, this.state.results[0].venue.location.lng], 15);

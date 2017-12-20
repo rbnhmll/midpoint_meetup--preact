@@ -10,10 +10,7 @@ h1
     font-size: 7.5rem
     letter-spacing: 3px
     text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.8), 8px 8px 0 transparentize($darkblue, 0.4)
-
-    span
-        color: $orange
-
+    margin-bottom: 0
 
     @media all and (max-width: 540px)
         font-size: 6.4rem
@@ -24,3 +21,21 @@ h1
     @media all and (max-width: 420px)
         font-size: 4rem
         text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8), 5px 5px 0 transparentize($darkblue, 0.4)
+
+h1,
+h2
+    span
+        color: $orange
+
+h2
+    margin-bottom: 5rem
+    font-size: 4rem
+    margin-top: 0
+    @media all and (max-width: 540px)
+        font-size: 3.5rem
+
+    @media all and (max-width: 485px)
+        font-size: 3rem
+
+    @media all and (max-width: 420px)
+        font-size: 2.5rem

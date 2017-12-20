@@ -152,7 +152,6 @@ class SearchForm extends Component {
 	}
 
 	getVenues() {
-		const self = this;
 		let sectionSelect;
 		let querySelect;
 
@@ -184,8 +183,8 @@ class SearchForm extends Component {
 		})
 			.then(res3 => {
 				const venueResult = res3.data.response.groups[0].items;
-				self.showResults = true;
-				self.props.setResults(venueResult);
+				this.showResults = true;
+				this.props.setResults(venueResult);
 				// self.props.displayVenues();
 			})
 			.catch(error => {
@@ -251,7 +250,7 @@ class SearchForm extends Component {
 							<label htmlFor="friendLocation" class={style.locationLabel}>
 								Friend's location <span>(e.g. 1 Yonge Street, Toronto)</span>
 							</label>
-						</div>						
+						</div>
 					</div>
 				</div>
 				<div class={`${style['button-container']} animated fadeIn`}>

@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import style from './style.sass';
 
 const Venue = (props) => {
@@ -12,7 +12,7 @@ const Venue = (props) => {
 					alt={props.result.venue.name}
 				/>
 			</a>
-			<h2 class={style.venue__name}>{props.result.venue.name}</h2>
+			<h3 class={style.venue__name}>{props.result.venue.name}</h3>
 			<p class={style.venue__addr}>{props.result.venue.location.formattedAddress[0]}</p>
 			<p class={style.venue__city}>{props.result.venue.location.formattedAddress[1]}</p>
 			<p class={style.venue__dist}>
