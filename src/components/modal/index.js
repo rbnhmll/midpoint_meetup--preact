@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import style from './style.sass';
 
 class Modal extends Component {
+
 	componentDidMount() {
 		// Hide modal on Esc
 		document.addEventListener('keydown', e => {
