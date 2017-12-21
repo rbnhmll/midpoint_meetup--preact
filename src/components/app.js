@@ -32,7 +32,7 @@ class App extends Component {
 
 	async componentDidMount() {
 		const result = await this.defineIPLocation();
-		if (result !== "error") {
+		if (result !== 'error') {
 			const cityLatLng = await this.getCityLatLng(result.data.city);
 			this.setMap(cityLatLng);
 		} else {
