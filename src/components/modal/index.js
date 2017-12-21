@@ -4,10 +4,9 @@ import style from './style.sass';
 class Modal extends Component {
 	componentDidMount() {
 		// Hide modal on Esc
-		const self = this;
 		document.addEventListener('keydown', e => {
 			if (e.keyCode === 27) {
-				self.props.closeModal();
+				this.props.closeModal();
 			}
 		});
 	}
@@ -15,7 +14,7 @@ class Modal extends Component {
 	render() {
 		return (
 			<div class={`${style.modal_container} ${this.props.show_modal ? `${style.show}` : ''}`}>
-				<div class={style.overlay} />
+				<div onClick={this.props.closeModal} class={style.overlay} />
 				<div class={style.modal}>
 					<button onClick={this.props.closeModal} class={style['close-button']}>
 						<i class="fa fa-times" />
