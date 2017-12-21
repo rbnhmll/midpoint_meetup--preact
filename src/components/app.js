@@ -1,9 +1,10 @@
 import { h, Component } from 'preact';
 
 import scrollToElement from 'scroll-to-element';
-import 'mapbox.js';
+// import 'mapbox.js';
 import Axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
+import mapboxgl from 'mapbox-gl';
 
 import Banner from './banner';
 import SearchForm from './searchForm';
@@ -35,8 +36,9 @@ class App extends Component {
 		if (result !== 'error') {
 			const cityLatLng = await this.getCityLatLng(result.data.city);
 			this.setMap(cityLatLng);
-		} else {
-			this.setMap(result);			
+		}
+		else {
+			this.setMap(result);
 		}
 	}
 
@@ -55,32 +57,41 @@ class App extends Component {
 			const cityLatLng = await Axios.get(
 				`https://api.mapbox.com/v4/geocode/mapbox.places/${city}.json?access_token=${this.state.mapBoxKey}`);
 			return cityLatLng;
-		} catch(err) {
+		}
+		catch (err) {
 			console.error(err)
 		}
 	}
 	
 	setMap(locData) {
 		// Initialize mapbox
-		let map;
+		mapboxgl.accessToken = this.state.mapBoxKey;
+		let options = {
+			container: 'map',
+			zoom: 12,
+			trackResize: true,
+			scrollZoom: false,
+			style: 'mapbox://styles/mapbox/light-v9'
+		};
 		// Check if the ip
-		if (locData != "error") {
+		if (locData !== 'error') {
 			const cityCenter = locData.data.features[0].center;
-			map = L.map('map').setView([cityCenter[1], cityCenter[0]], 12);			
-		} else {
-			map = L.map('map').setView([43.65323, -79.38318], 12);
+			const yourLatLng = new mapboxgl.LngLat(cityCenter[0], cityCenter[1]);
+			options.center = yourLatLng;
 		}
-	
-		// Disable scrolling when hovering on map
-		map.scrollWheelZoom.disable();
-	
-		// Some Mapbox specifics for on load [suplied by mapbox]
-		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-			maxZoom: 18,
-			id: 'rbnhmll.n1oca4ci',
-			accessToken: 'pk.eyJ1IjoicmJuaG1sbCIsImEiOiI3NjY4ZDk5NjFhMTYyMDMxMWFmMmM5YWEzMzlkMDgwZiJ9.Ep7u1zX_6SFI94jPki9O-w'
-		}).addTo(map);
-	
+		else {
+			const torontoLatLng = new mapboxgl.LngLat(-79.38318, 43.65323);
+			options.center = torontoLatLng;
+		}
+
+		const nav = new mapboxgl.NavigationControl();
+
+		const map = new mapboxgl.Map(options)
+			.addControl(nav, 'top-left')
+			.addControl(new mapboxgl.ScaleControl({
+				maxWidth: 80,
+				unit: 'metric'
+			}));
 		this.setState({ map });
 	}
 
@@ -110,15 +121,42 @@ class App extends Component {
 			duration: 500
 		});
 
-		L.Icon.Default.imagePath = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/images/';
+		let markerBounds = []
+
 		this.state.results.forEach(result => {
 			const v = result.venue;
+			const lngLat = [v.location.lng, v.location.lat];
 			const address = v.location.formattedAddress[0];
-			L.marker([v.location.lat, v.location.lng])
-				.addTo(this.state.map)
-				.bindPopup(`${v.name}:<br>${address}`);
+			// Set popup
+			const markerHeight = 25, markerRadius = 15, linearOffset = 25;
+			const popupOffsets = {
+				top: [0, 0],
+				'top-left': [0,0],
+				'top-right': [0,0],
+				bottom: [0, -markerHeight],
+				'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+				'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+				left: [markerRadius, (markerHeight - markerRadius) * -1],
+				right: [-markerRadius, (markerHeight - markerRadius) * -1]
+			};
+			const popup = new mapboxgl.Popup({
+				offset: popupOffsets
+			})
+				.setHTML(`<p style="margin: 0;text-align: center; padding: 5px;">${v.name}:<br>${address}</p>`);
+			// Set marker
+			const marker = new mapboxgl.Marker()
+				.setLngLat(lngLat)
+				.setPopup(popup)
+				.addTo(this.state.map);
+			markerBounds.push(lngLat);
 		});
-		this.state.map.setView([this.state.results[0].venue.location.lat, this.state.results[0].venue.location.lng], 15);
+		// Zoom map to area containing markers.
+		const map = this.state.map;
+		const bounds = markerBounds.reduce((bounds, coord) => bounds.extend(coord), new mapboxgl.LngLatBounds(markerBounds[0], markerBounds[0]));
+		
+		map.fitBounds(bounds, {
+			padding: 75
+		});
 	}
 
 	render() {
