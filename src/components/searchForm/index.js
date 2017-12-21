@@ -9,9 +9,9 @@ class SearchForm extends Component {
 		super();
 		this.state = {
 			userInput: {
-				yourLocation: '154 Sorauren Avenue, Toronto, Ontario M6R 2E6, Canada',
-				friendLocation: '483 queen west toronto',
-				venueType: 'beer'
+				yourLocation: '',
+				friendLocation: '',
+				venueType: ''
 			},
 			centerPtResult: '',
 			supports_geolocation: false,
