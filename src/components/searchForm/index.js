@@ -9,9 +9,9 @@ class SearchForm extends Component {
 		super();
 		this.state = {
 			userInput: {
-				yourLocation: '',
-				friendLocation: '',
-				venueType: ''
+				yourLocation: '154 Sorauren Avenue, Toronto, Ontario M6R 2E6, Canada',
+				friendLocation: '483 queen west toronto',
+				venueType: 'beer'
 			},
 			centerPtResult: '',
 			supports_geolocation: false,
@@ -185,7 +185,6 @@ class SearchForm extends Component {
 				const venueResult = res3.data.response.groups[0].items;
 				this.showResults = true;
 				this.props.setResults(venueResult);
-				// self.props.displayVenues();
 			})
 			.catch(error => {
 				console.error(error);
