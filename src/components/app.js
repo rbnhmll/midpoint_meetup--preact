@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 
-import scrollToElement from 'scroll-to-element';
 // import 'mapbox.js';
 import Axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
@@ -115,12 +114,6 @@ class App extends Component {
 	}
 
 	displayVenues() {
-		scrollToElement('#map', {
-			offset: -15,
-			ease: 'linear',
-			duration: 500
-		});
-
 		let markerBounds = []
 
 		this.state.results.forEach(result => {
