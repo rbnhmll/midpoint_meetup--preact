@@ -4,7 +4,8 @@
 ### New version includes many new and improved features
 - Now built on Preact instead of Vue/Rails
 - Mapping upgraded to Mapbox GL.
-- Geolocation services.
+- New minimal map style
+- Optional geolocation services.
 - Auto-load map location based on IP if available.
 - Added ratings to search results
 - Minor style tweaks and accessibility improvements.
