@@ -1,5 +1,13 @@
 # Midpoint Meetup -- Preact
 
+## V.2.0
+### New version includes many new and improved features
+- Mapping upgraded to Mapbox GL.
+- Geolocation services.
+- Auto-load map location based on IP if available.
+- Added ratings to search results
+- Minor style tweaks and accessibility improvements.
+
 ## CLI Commands
 
 ``` bash
