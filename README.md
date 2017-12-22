@@ -1,7 +1,8 @@
 # Midpoint Meetup -- Preact
 
-## V.2.0
+## v.2.0
 ### New version includes many new and improved features
+- Now built on Preact instead of Vue/Rails
 - Mapping upgraded to Mapbox GL.
 - Geolocation services.
 - Auto-load map location based on IP if available.
