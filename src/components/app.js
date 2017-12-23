@@ -114,7 +114,7 @@ class App extends Component {
 	}
 
 	displayVenues() {
-		let markerBounds = []
+		let markerBounds = [];
 
 		this.state.results.forEach(result => {
 			const v = result.venue;
