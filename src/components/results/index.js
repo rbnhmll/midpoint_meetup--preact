@@ -1,18 +1,14 @@
 import { h, Component } from 'preact';
 import style from './style.sass';
 
-import scrollToElement from 'scroll-to-element';
+import smoothScroll from 'smoothscroll';
 
 import Venue from '../venue';
 
 class Results extends Component {
 	componentDidMount() {
-		scrollToElement('#map', {
-			offset: -20,
-			align: 'top',
-			ease: 'linear',
-			duration: 500
-		});
+		const map = document.getElementById('map');
+		smoothScroll(map, 500);
 	}
 	render() {
 		const results = this.props.results;

@@ -2,7 +2,6 @@ import { h } from 'preact';
 import style from './style.sass';
 
 const Venue = (props) => {
-	console.log(props)
 	return (
 		<div class={style.venueContainer} key={props.result.venue.id}>
 			<a href={`https://foursquare.com/v/${props.result.venue.id}`} target="_blank">
