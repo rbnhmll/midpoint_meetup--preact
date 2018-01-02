@@ -32,6 +32,7 @@ class App extends Component {
 
 	async componentDidMount() {
 		const result = await this.defineIPLocation();
+		console.log('RESULT', result);
 		if (result !== 'error') {
 			const cityLatLng = await this.getCityLatLng(result.data.city);
 			this.setMap(cityLatLng);
@@ -40,26 +41,29 @@ class App extends Component {
 			this.setMap(result);
 		}
 	}
-
+	
 	async defineIPLocation() {
+		let data;
 		try {
-			const data = await Axios.get(`https://freegeoip.net/json/`);
-			return data;
-		} catch(err) {
+			data = await Axios.get('https://freegeoip.net/json/');
+			console.log('DATA:', data);
+		} catch (err) {
+			data = "error";
 			console.error(err, "Failed to load IP, likely due to VPN usage. This is blocked by https://freegeoip.net/")
-			return "error";
 		}
+		return data;
 	}
 
 	async getCityLatLng(city) {
+		let cityLatLng;
 		try {
-			const cityLatLng = await Axios.get(
+			cityLatLng = await Axios.get(
 				`https://api.mapbox.com/v4/geocode/mapbox.places/${city}.json?access_token=${this.state.mapBoxKey}`);
-			return cityLatLng;
-		}
-		catch (err) {
-			console.error(err)
-		}
+			}
+			catch (err) {
+				console.error(err)
+			}
+		return cityLatLng;
 	}
 	
 	setMap(locData) {
