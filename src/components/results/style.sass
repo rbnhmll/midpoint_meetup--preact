@@ -5,10 +5,9 @@
     width: 90%
     margin: 0 auto
     background: linear-gradient(rgba(#fff, 0.5), rgba(#fff, 0.5)), url("../../assets/images/patterns/hexellence.png")
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    justify-content: space-between
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+    grid-gap: 20px
     border: 2px solid $darkblue
     margin-top: 50px
     padding: 20px
